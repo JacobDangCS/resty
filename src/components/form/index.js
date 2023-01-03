@@ -1,14 +1,14 @@
 import './form.scss';
 
 
-export default function Form(){
+function Form(props){
  const handleSubmit = e => {
     e.preventDefault();
     const formData = {
       method:'GET',
       url: 'https://pokeapi.co/api/v2/pokemon',
     };
-    this.props.handleApiCall(formData);
+    props.handleApiCall(formData);
   }
 
   return (
@@ -29,3 +29,5 @@ export default function Form(){
     </>
   );
 };
+
+export default Form;
