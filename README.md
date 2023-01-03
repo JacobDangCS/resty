@@ -1,7 +1,8 @@
 # RESTy
 A front-end application that involves API utilization.
 
-[Lab_26_Deployment](deployment link here)
+## Deployment Link
+[Lab 26 Deployment](https://willowy-torte-34af3f.netlify.app/)
 
 ## UML
-[Lab26_UML](./assets/Lab26-image.png)
+[Lab26 UML](./assets/Lab26-image.png)
