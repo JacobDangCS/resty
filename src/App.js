@@ -6,7 +6,7 @@ import Header from './components/header';
 import Footer from './components/footer';
 import Form from './components/form';
 import Results from './components/results';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 
@@ -24,6 +24,7 @@ const App = () => {
     setLoading(false);
     setRequestParams(requestParams);
   }
+
   return (
     <>
       <Header />
@@ -37,3 +38,16 @@ const App = () => {
 }
 
 export default App;
+
+  //1/4/2023 LIVE DEMO Example
+  useEffect(() => {
+    
+  }, []);
+
+  useEffect(() => {
+    async function callApi(){
+      let res = await axios.get('url');
+      setData(res.data.results)
+    }
+    callApi();
+  }, []);

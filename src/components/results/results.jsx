@@ -10,7 +10,7 @@ const Results = (props) => {
             {
                 props.loading ? <div>Loading...</div> :
                     data ?
-                        (<pre testid='results-data'>
+                        (<pre data-testid="results-data">
                             <span> Results
                                 <JSONPretty data={data} />
                             </span>
