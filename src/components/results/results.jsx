@@ -7,14 +7,16 @@ const Results = (props) => {
 
     return (
         <section>
-            {data ? 
-            (<>
-                <span> Results
-                    <JSONPretty data={data} />
-                </span>
-            </>) :
-            (<span>Awaiting API Request</span>)
-        }
+            {
+                props.loading ? <div>Loading...</div> :
+                    data ?
+                        (<pre testid='results-data'>
+                            <span> Results
+                                <JSONPretty data={data} />
+                            </span>
+                        </pre>) :
+                        (<span>Awaiting API Request</span>)
+            }
         </section>
     );
 };

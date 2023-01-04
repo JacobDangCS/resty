@@ -7,27 +7,29 @@ const Form = (props) => {
     const handleSubmit = e => {
         e.preventDefault();
         let apiUrl = e.target.url.value;
+        props.setLoading(true);
         props.handleApiCall(apiUrl, method);
     }
+
     return (
         <>
             <form onSubmit={handleSubmit}>
                 <label >
                     <span>URL: </span>
-                    <input name='url' type='text' />
+                    <input name='url' type='text'/>
                     <button type="submit">GO!</button>
                 </label>
+                <label>
+                </label>
                 <label className="methods">
-                    <span id="get" onClick={() => setMethod('GET')}>GET</span>
-                    <span id="post" onClick={() => setMethod('POST')}>POST</span>
-                    <span id="put" onClick={() => setMethod('PUT')}>PUT</span>
-                    <span id="delete" onClick={() => setMethod('DELETE')}>DELETE</span>
+                    <span onClick={() => setMethod('GET')} id="get">GET</span>
+                    <span onClick={() => setMethod('POST')} id="post">POST</span>
+                    <span onClick={() => setMethod('PUT')} id="put">PUT</span>
+                    <span onClick={() => setMethod('DELETE')} id="delete">DELETE</span>
                 </label>
             </form>
         </>
     );
 }
-
-
 
 export default Form;
