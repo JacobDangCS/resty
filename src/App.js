@@ -9,45 +9,38 @@ import Results from './components/results';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-
 const App = () => {
   const [data, setData] = useState(null);
   const [requestParams, setRequestParams] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const callApi = async (url, method = 'GET') => {
-    let newData = await axios({
-      method: method,
-      url: url,
-    })
-    setData(newData.data.results);
-    setLoading(false);
-    setRequestParams(requestParams);
-  }
+  useEffect(() => {
+    console.log('Testing useEffect')
+  }, []);
+
+  useEffect(() => {
+    async function callApi(url, method = 'GET') {
+      let newData = await axios({
+        method: method,
+        url: url,
+      })
+      setData(newData.data.results);
+      setLoading(false);
+      setRequestParams(requestParams);
+    }
+    callApi();
+  }, [requestParams]);
 
   return (
     <>
       <Header />
       <div>Request Method: {requestParams.method}</div>
       <div>URL: {requestParams.url}</div>
-      <Form handleApiCall={callApi} setLoading={setLoading}/>
-      <Results data={data} loading={loading}/>
+      <Form handleApiCall={requestParams} setLoading={setLoading} />
+      <Results data={data} loading={loading} />
       <Footer />
     </>
   );
 }
 
 export default App;
-
-  //1/4/2023 LIVE DEMO Example
-  useEffect(() => {
-    
-  }, []);
-
-  useEffect(() => {
-    async function callApi(){
-      let res = await axios.get('url');
-      setData(res.data.results)
-    }
-    callApi();
-  }, []);

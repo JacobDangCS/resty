@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 const Form = (props) => {
     const [method, setMethod] = useState('GET');
+    const [ setApiUrl ] = useState('');
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -16,7 +17,7 @@ const Form = (props) => {
             <form onSubmit={handleSubmit}>
                 <label >
                     <span>URL: </span>
-                    <input name='url' type='text'/>
+                    <input name='url' type='text' onChange = {(e) => setApiUrl(e.target.value)}/>
                     <button type="submit">GO!</button>
                 </label>
                 <label>
