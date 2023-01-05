@@ -4,8 +4,8 @@ import './App.scss';
 // There's pros and cons for each way of doing this ...
 import Header from './components/header';
 import Footer from './components/footer';
-import Form from './components/form';
-import Results from './components/results';
+import Form from './components/form/form';
+import Results from './components/results/results';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -13,30 +13,40 @@ const App = () => {
   const [data, setData] = useState(null);
   const [requestParams, setRequestParams] = useState({});
   const [loading, setLoading] = useState(false);
+  const [method, setMethod] = useState('GET');
+  const [apiUrl, setApiUrl] = useState('');
+
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    setLoading(true);
+    const reqObj = { url: apiUrl, method }
+    apiCall(reqObj);
+  }
 
   useEffect(() => {
     console.log('Testing useEffect')
   }, []);
 
+  const apiCall = (requestParams) => {
+    setRequestParams(requestParams)
+  }
+
   useEffect(() => {
-    async function callApi(url, method = 'GET') {
-      let newData = await axios({
-        method: method,
-        url: url,
-      })
-      setData(newData.data.results);
+    async function axiosCall() {
+      let newData = await axios(requestParams);
+      setData(newData.data);
       setLoading(false);
-      setRequestParams(requestParams);
     }
-    callApi();
+    if (requestParams.method && requestParams.url){axiosCall()}
   }, [requestParams]);
 
   return (
     <>
       <Header />
-      <div>Request Method: {requestParams.method}</div>
-      <div>URL: {requestParams.url}</div>
-      <Form handleApiCall={requestParams} setLoading={setLoading} />
+      <div>Request Method: {method}</div>
+      <div>URL: {apiUrl}</div>
+      <Form handleSubmit={handleSubmit} setMethod={setMethod} setApiUrl={setApiUrl} />
       <Results data={data} loading={loading} />
       <Footer />
     </>
